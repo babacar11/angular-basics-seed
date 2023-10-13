@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RouterOutlet} from "@angular/router";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    NgOptimizedImage
+  ],
   selector: 'app-root',
   template: `
     <div class="app">
       <header class="header">
-        <img src="/assets/img/logo.svg" alt="Ultimate Donuts" class="logo" />
+        <img ngSrc="/assets/img/logo.svg"  width="100" height="88"  alt="Ultimate Donuts" class="logo"/>
       </header>
       <router-outlet></router-outlet>
     </div>
@@ -21,6 +28,7 @@ import { Component, OnInit } from '@angular/core';
         padding: 25px;
         border: 4px solid #ef9fc7;
       }
+
       .header {
         display: flex;
         justify-content: center;
@@ -36,13 +44,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   message!: string;
-  newMessage!: string;
-
   ngOnInit() {
     this.message = 'Hello World';
   }
 
-  handleCLick(event: Event) {
-    console.log(event);
-  }
 }

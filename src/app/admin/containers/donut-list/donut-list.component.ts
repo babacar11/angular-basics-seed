@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Donut } from '../../model/donut.model';
-import { DonutService } from '../../service/donut.service';
+import {Component, OnInit} from '@angular/core';
+import {Donut} from '../../model/donut.model';
+import {DonutService} from '../../service/donut.service';
+import {NgFor, NgIf, NgOptimizedImage} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import {DonutCardComponent} from "../../components/donut-card/donut-card.component";
 
 @Component({
+  standalone: true,
+  imports: [RouterLink, NgIf, NgFor, DonutCardComponent, NgOptimizedImage],
   selector: 'donut-list',
   template: `
     <div>
       <div class="donut-list-actions">
         <a routerLink="new" class="btn btn--green">
           New Donut
-          <img src="/assets/img/icon/plus.svg" />
+          <img ngSrc="/assets/img/icon/plus.svg" width="25" height="25" alt="logo"/>
         </a>
       </div>
       <ng-container *ngIf="donuts?.length; else nothing">
@@ -36,7 +41,8 @@ import { DonutService } from '../../service/donut.service';
 export class DonutListComponent implements OnInit {
   donuts!: Donut[];
 
-  constructor(private donutService: DonutService) {}
+  constructor(private donutService: DonutService) {
+  }
 
   ngOnInit(): void {
     this.donutService.read().subscribe({

@@ -1,17 +1,11 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse, HttpHeaders,} from '@angular/common/http';
 
-import { pipe, tap, of, map, catchError, throwError, retry } from 'rxjs';
+import {catchError, map, of, retry, tap, throwError} from 'rxjs';
 
-import { Donut } from '../model/donut.model';
+import {Donut} from '../model/donut.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class DonutService {
   private donuts: Donut[] = [];
   private baseUrl: string = `/api/donuts`;
@@ -55,8 +49,8 @@ export class DonutService {
     );
   }
 
-  create(paylaod: Donut) {
-    return this.http.post<Donut>(this.baseUrl, paylaod).pipe(
+  create(payload: Donut) {
+    return this.http.post<Donut>(this.baseUrl, payload).pipe(
       tap((donut) => {
         this.donuts = [...this.donuts, donut];
       }),
@@ -79,8 +73,8 @@ export class DonutService {
   }
 
   delete(payload: Donut) {
-    return this.http.delete<Donut>(`${this.baseUrl}/${payload.id}888`).pipe(
-      tap((data) => {
+    return this.http.delete<Donut>(`${this.baseUrl}/${payload.id}`).pipe(
+      tap(() => {
         this.donuts = this.donuts.filter((donut) => donut.id !== payload.id);
       }),
       catchError(this.handleError)

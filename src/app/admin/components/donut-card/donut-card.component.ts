@@ -1,7 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { Donut } from '../../model/donut.model';
+import {Component, Input} from '@angular/core';
+import {Donut} from '../../model/donut.model';
+import {RouterLink} from "@angular/router";
+import {CurrencyPipe, NgClass, NgOptimizedImage, NgSwitch, NgSwitchCase} from "@angular/common";
 
 @Component({
+  standalone: true,
+  imports: [RouterLink, NgClass, NgSwitch, NgSwitchCase, CurrencyPipe, NgOptimizedImage],
   selector: 'donut-card',
   template: `
     <a
@@ -12,7 +16,9 @@ import { Donut } from '../../model/donut.model';
       }"
     >
       <img
-        src="/assets/img/{{ donut.icon }}.svg"
+        ngSrc="/assets/img/{{ donut.icon }}.svg"
+        width="50"
+        height="50"
         [alt]="donut.name"
         class="donut-card-icon"
       />
@@ -46,9 +52,11 @@ import { Donut } from '../../model/donut.model';
         &:hover {
           transform: translateY(-3px);
         }
+
         &-promo {
           border: 2px solid #eee;
         }
+
         &-label {
           border: 1px solid #c14853;
           border-radius: 4px;
@@ -61,13 +69,14 @@ import { Donut } from '../../model/donut.model';
         &-name {
           font-size: 16px;
         }
+
         &-price {
           font-size: 14px;
           color: #c14583;
         }
 
         &-icon {
-          width: 50px;
+
           margin-right: 10px;
         }
       }

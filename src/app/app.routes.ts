@@ -1,14 +1,17 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import { PageNotfoundComponent } from './page-notfound/page-notfound.component';
+import {PageNotfoundComponent} from './page-notfound/page-notfound.component';
+import {HttpClientModule} from "@angular/common/http";
+import {importProvidersFrom} from "@angular/core";
+import {DonutService} from "./admin/service/donut.service";
 
-export const routes: Routes = [
+export const AppRoutes: Routes = [
   {
     path: 'admin',
     loadChildren: () =>
-      import('./admin/admin.module').then((x) => x.AdminModule),
+      import('./admin/admin.routes').then((x) => x.AdminRoutes),
+    providers: [importProvidersFrom(HttpClientModule), DonutService]
   },
   { path: '', pathMatch: 'full', redirectTo: 'admin' },
-  // { path: '404NotFound', component: PageNotfoundComponent },
   { path: '**', component: PageNotfoundComponent },
 ];

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 
-import { Donut } from '../../model/donut.model';
-import { DonutService } from '../../service/donut.service';
+import {Donut} from '../../model/donut.model';
+import {DonutService} from '../../service/donut.service';
+import {DonutFormComponent} from "../../components/donut-form/donut-form.component";
 
 @Component({
+  standalone: true,
+  imports: [RouterModule, DonutFormComponent],
   selector: 'donut-single',
   template: `
     <div>
@@ -28,7 +31,8 @@ export class DonutSingleComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private donutService: DonutService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -46,6 +50,7 @@ export class DonutSingleComponent implements OnInit {
       error: (error) => console.warn(error.message),
     });
   }
+
   onUpdate(donut: Donut) {
     this.donutService.update(donut).subscribe({
       next: () => this.router.navigate(['admin']),
