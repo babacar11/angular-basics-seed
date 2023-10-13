@@ -52,6 +52,10 @@ label {
   &--textarea {
     resize: vertical;
   }
+
+  &--number {
+    -moz-appearance: textfield;
+  }
 }
 
 .btn {
@@ -84,4 +88,22 @@ label {
 form .ng-invalid.ng-touched {
   background: #ffe7e7;
   border-color: #e66262;
+}
+
+// Angulars Related Styles
+form .ng-touched.ng-invalid {
+  background: #ffe7e7;
+  border-color: #e66262;
+}
+
+form .ng-valid {
+  border-color: green;
+  background: whitesmoke;
+}
+form .ng-valid::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
 }
